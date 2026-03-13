@@ -12,6 +12,11 @@ export default defineConfig({
   },
   routes: [
     {
+      path: '/login',
+      layout: false,
+      component: './Login',
+    },
+    {
       path: '/',
       redirect: '/dashboard',
     },
