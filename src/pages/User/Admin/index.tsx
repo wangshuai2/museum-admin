@@ -1,72 +1,217 @@
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Popconfirm, Tag, message, Modal, Form, Input, Select } from 'antd';
+import { Button, Popconfirm, Tag, message, Modal, Form, Input, Select, Space } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, KeyOutlined } from '@ant-design/icons';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, memo } from 'react';
+import { useAccess } from '@umijs/max';
+import {
+  getAdminList,
+  createAdmin,
+  updateAdmin,
+  deleteAdmin,
+  resetAdminPassword,
+  type AdminItem,
+  type CreateAdminParams,
+  type UpdateAdminParams,
+  type ResetPasswordParams,
+} from '@/services/api';
 
-interface AdminItem {
-  id: string;
-  username: string;
-  nickname: string;
-  phone: string;
-  email: string;
-  status: number;
-  role: string;
-  permissions: string[];
-  createTime: string;
-}
+const AdminTable = memo(ProTable<AdminItem>);
+
+// 输入消毒函数 - 移除潜在XSS字符
+const sanitizeInput = (input: string): string => {
+  return input.replace(/[<>\"'&]/g, '');
+};
+
+// 表单验证规则
+const validationRules = {
+  username: [
+    { required: true, message: '请输入用户名' },
+    { min: 3, max: 20, message: '用户名长度为3-20个字符' },
+    { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名只能包含字母、数字和下划线' },
+  ],
+  password: [
+    { required: true, message: '请输入密码' },
+    { min: 6, max: 20, message: '密码长度为6-20个字符' },
+  ],
+  nickname: [
+    { required: true, message: '请输入昵称' },
+    { min: 2, max: 50, message: '昵称长度为2-50个字符' },
+    { pattern: /^[^<>\"'&]*$/, message: '昵称包含非法字符' },
+  ],
+  phone: [
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' },
+  ],
+  email: [
+    { type: 'email' as const, message: '请输入正确的邮箱' },
+    { max: 100, message: '邮箱长度不能超过100个字符' },
+  ],
+};
 
 const AdminList = () => {
   const actionRef = useRef<any>();
+  const access = useAccess();
   const [modalVisible, setModalVisible] = useState(false);
   const [resetPwdVisible, setResetPwdVisible] = useState(false);
   const [editingRecord, setEditingRecord] = useState<AdminItem | null>(null);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const [pwdForm] = Form.useForm();
 
-  // 模拟数据
-  const mockData: AdminItem[] = [
-    { id: '1', username: 'admin', nickname: '超级管理员', phone: '13800138000', email: 'admin@museum.com', status: 1, role: 'super', permissions: ['all'], createTime: '2024-01-01 00:00:00' },
-    { id: '2', username: 'editor', nickname: '内容编辑', phone: '13800138001', email: 'editor@museum.com', status: 1, role: 'editor', permissions: ['content', 'ugc'], createTime: '2024-01-15 10:30:00' },
-    { id: '3', username: 'operator', nickname: '运营人员', phone: '13800138002', email: 'operator@museum.com', status: 1, role: 'operator', permissions: ['user', 'museum'], createTime: '2024-02-01 14:20:00' },
-  ];
+  // 检查权限
+  const canCreate = access.canAdmin;
+  const canEdit = access.canAdmin;
+  const canDelete = access.canAdmin;
+  const canResetPassword = access.canAdmin;
 
-  const handleAdd = () => {
+  const handleAdd = useCallback(() => {
+    if (!canCreate) {
+      message.error('您没有权限创建管理员');
+      return;
+    }
     setEditingRecord(null);
     form.resetFields();
     setModalVisible(true);
-  };
+  }, [canCreate, form]);
 
-  const handleEdit = (record: AdminItem) => {
+  const handleEdit = useCallback((record: AdminItem) => {
+    if (!canEdit) {
+      message.error('您没有权限编辑管理员');
+      return;
+    }
     setEditingRecord(record);
-    form.setFieldsValue(record);
+    form.setFieldsValue({
+      username: record.username,
+      nickname: record.nickname,
+      phone: record.phone,
+      email: record.email,
+      role: record.role,
+      status: record.status,
+    });
     setModalVisible(true);
-  };
+  }, [canEdit, form]);
 
-  const handleDelete = async (id: string) => {
-    message.success('删除成功');
-    actionRef.current?.reload();
-  };
+  const handleDelete = useCallback(async (id: string) => {
+    if (!canDelete) {
+      message.error('您没有权限删除管理员');
+      return;
+    }
+    try {
+      setLoading(true);
+      const result = await deleteAdmin(id);
+      if (result.success) {
+        message.success('删除成功');
+        actionRef.current?.reload();
+      } else {
+        message.error(result.message || '删除失败');
+      }
+    } catch (error: any) {
+      message.error(error.message || '删除失败');
+    } finally {
+      setLoading(false);
+    }
+  }, [canDelete]);
 
-  const handleResetPwd = (record: AdminItem) => {
+  const handleResetPwd = useCallback((record: AdminItem) => {
+    if (!canResetPassword) {
+      message.error('您没有权限重置密码');
+      return;
+    }
     setEditingRecord(record);
     pwdForm.resetFields();
     setResetPwdVisible(true);
-  };
+  }, [canResetPassword, pwdForm]);
 
-  const handleSubmit = async (values: any) => {
-    if (editingRecord) {
-      message.success('更新成功');
-    } else {
-      message.success('创建成功');
+  const handleSubmit = useCallback(async (values: any) => {
+    try {
+      setLoading(true);
+
+      // 消毒输入
+      const sanitizedValues = {
+        ...values,
+        username: sanitizeInput(values.username),
+        nickname: sanitizeInput(values.nickname),
+        phone: values.phone ? sanitizeInput(values.phone) : undefined,
+        email: values.email ? sanitizeInput(values.email) : undefined,
+      };
+
+      if (editingRecord) {
+        const updateData: UpdateAdminParams = {
+          nickname: sanitizedValues.nickname,
+          phone: sanitizedValues.phone,
+          email: sanitizedValues.email,
+          role: sanitizedValues.role,
+          status: sanitizedValues.status,
+        };
+        const result = await updateAdmin(editingRecord.id, updateData);
+        if (result.success) {
+          message.success('更新成功');
+          setModalVisible(false);
+          actionRef.current?.reload();
+        } else {
+          message.error(result.message || '更新失败');
+        }
+      } else {
+        const createData: CreateAdminParams = {
+          username: sanitizedValues.username,
+          password: sanitizedValues.password,
+          nickname: sanitizedValues.nickname,
+          phone: sanitizedValues.phone,
+          email: sanitizedValues.email,
+          role: sanitizedValues.role,
+          status: sanitizedValues.status ?? 1,
+        };
+        const result = await createAdmin(createData);
+        if (result.success) {
+          message.success('创建成功');
+          setModalVisible(false);
+          actionRef.current?.reload();
+        } else {
+          message.error(result.message || '创建失败');
+        }
+      }
+    } catch (error: any) {
+      message.error(error.message || '操作失败');
+    } finally {
+      setLoading(false);
     }
-    setModalVisible(false);
-    actionRef.current?.reload();
-  };
+  }, [editingRecord]);
 
-  const handleResetPwdSubmit = async (values: any) => {
-    message.success('密码重置成功');
-    setResetPwdVisible(false);
-  };
+  const handleResetPwdSubmit = useCallback(async (values: any) => {
+    if (!editingRecord) return;
+    try {
+      setLoading(true);
+      const data: ResetPasswordParams = {
+        newPassword: values.newPassword,
+      };
+      const result = await resetAdminPassword(editingRecord.id, data);
+      if (result.success) {
+        message.success('密码重置成功');
+        setResetPwdVisible(false);
+      } else {
+        message.error(result.message || '密码重置失败');
+      }
+    } catch (error: any) {
+      message.error(error.message || '密码重置失败');
+    } finally {
+      setLoading(false);
+    }
+  }, [editingRecord]);
+
+  const fetchData = useCallback(async (params: any) => {
+    const result = await getAdminList({
+      current: params.current,
+      pageSize: params.pageSize,
+      username: params.username,
+      nickname: params.nickname,
+      role: params.role,
+      status: params.status,
+    });
+    return {
+      data: result.data?.list || [],
+      success: result.success,
+      total: result.data?.total || 0,
+    };
+  }, []);
 
   const columns = [
     {
@@ -101,12 +246,17 @@ const AdminList = () => {
       width: 120,
       render: (role: string) => {
         const roleMap: Record<string, { color: string; text: string }> = {
-          'super': { color: 'red', text: '超级管理员' },
-          'editor': { color: 'orange', text: '内容编辑' },
-          'operator': { color: 'blue', text: '运营人员' },
+          super: { color: 'red', text: '超级管理员' },
+          editor: { color: 'orange', text: '内容编辑' },
+          operator: { color: 'blue', text: '运营人员' },
         };
         const { color, text } = roleMap[role] || { color: 'default', text: role };
         return <Tag color={color}>{text}</Tag>;
+      },
+      valueEnum: {
+        super: { text: '超级管理员' },
+        editor: { text: '内容编辑' },
+        operator: { text: '运营人员' },
       },
     },
     {
@@ -133,44 +283,60 @@ const AdminList = () => {
       title: '操作',
       valueType: 'option',
       width: 220,
-      render: (_: any, record: AdminItem) => [
-        <Button
-          key="edit"
-          type="link"
-          icon={<EditOutlined />}
-          onClick={() => handleEdit(record)}
-        >
-          编辑
-        </Button>,
-        <Button
-          key="resetPwd"
-          type="link"
-          icon={<KeyOutlined />}
-          onClick={() => handleResetPwd(record)}
-        >
-          重置密码
-        </Button>,
-        record.role !== 'super' && (
-          <Popconfirm
-            key="delete"
-            title="确认删除"
-            description="确定要删除这个管理员吗？"
-            onConfirm={() => handleDelete(record.id)}
-            okText="确认"
-            cancelText="取消"
-          >
-            <Button type="link" danger icon={<DeleteOutlined />}>
-              删除
+      render: (_: any, record: AdminItem) => {
+        const actions = [];
+
+        if (canEdit) {
+          actions.push(
+            <Button
+              key="edit"
+              type="link"
+              icon={<EditOutlined />}
+              onClick={() => handleEdit(record)}
+            >
+              编辑
             </Button>
-          </Popconfirm>
-        ),
-      ],
+          );
+        }
+
+        if (canResetPassword) {
+          actions.push(
+            <Button
+              key="resetPwd"
+              type="link"
+              icon={<KeyOutlined />}
+              onClick={() => handleResetPwd(record)}
+            >
+              重置密码
+            </Button>
+          );
+        }
+
+        if (canDelete && record.role !== 'super') {
+          actions.push(
+            <Popconfirm
+              key="delete"
+              title="确认删除"
+              description="确定要删除这个管理员吗？"
+              onConfirm={() => handleDelete(record.id)}
+              okText="确认"
+              cancelText="取消"
+            >
+              <Button type="link" danger icon={<DeleteOutlined />} loading={loading}>
+                删除
+              </Button>
+            </Popconfirm>
+          );
+        }
+
+        return <Space size={0}>{actions}</Space>;
+      },
     },
   ];
 
   return (
     <div>
-      <ProTable<AdminItem>
+      <AdminTable
         headerTitle="管理员列表"
         actionRef={actionRef}
         rowKey="id"
@@ -178,25 +344,18 @@ const AdminList = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          <Button key="add" type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            新增管理员
-          </Button>,
+          canCreate && (
+            <Button
+              key="add"
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleAdd}
+            >
+              新增管理员
+            </Button>
+          ),
         ]}
-        request={async (params) => {
-          // 模拟API调用
-          const filteredData = mockData.filter(item => {
-            if (params.username && !item.username.includes(params.username)) return false;
-            if (params.nickname && !item.nickname.includes(params.nickname)) return false;
-            if (params.role && item.role !== params.role) return false;
-            if (params.status !== undefined && item.status !== params.status) return false;
-            return true;
-          });
-          return {
-            data: filteredData,
-            success: true,
-            total: filteredData.length,
-          };
-        }}
+        request={fetchData}
         columns={columns}
         pagination={{
           pageSize: 10,
@@ -210,46 +369,69 @@ const AdminList = () => {
         onCancel={() => setModalVisible(false)}
         onOk={() => form.submit()}
         width={600}
+        confirmLoading={loading}
+        destroyOnClose
       >
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
+          preserve={false}
         >
           <Form.Item
             name="username"
             label="用户名"
-            rules={[{ required: true, message: '请输入用户名' }]}
+            rules={validationRules.username}
           >
-            <Input placeholder="请输入用户名" />
+            <Input
+              placeholder="请输入用户名"
+              disabled={!!editingRecord}
+              maxLength={20}
+              showCount
+            />
           </Form.Item>
           {!editingRecord && (
             <Form.Item
               name="password"
               label="初始密码"
-              rules={[{ required: true, message: '请输入初始密码' }]}
+              rules={validationRules.password}
             >
-              <Input.Password placeholder="请输入初始密码" />
+              <Input.Password
+                placeholder="请输入初始密码"
+                maxLength={20}
+              />
             </Form.Item>
           )}
           <Form.Item
             name="nickname"
             label="昵称"
-            rules={[{ required: true, message: '请输入昵称' }]}
+            rules={validationRules.nickname}
           >
-            <Input placeholder="请输入昵称" />
+            <Input
+              placeholder="请输入昵称"
+              maxLength={50}
+              showCount
+            />
           </Form.Item>
           <Form.Item
             name="phone"
             label="手机号"
+            rules={validationRules.phone}
           >
-            <Input placeholder="请输入手机号" />
+            <Input
+              placeholder="请输入手机号"
+              maxLength={11}
+            />
           </Form.Item>
           <Form.Item
             name="email"
             label="邮箱"
+            rules={validationRules.email}
           >
-            <Input placeholder="请输入邮箱" />
+            <Input
+              placeholder="请输入邮箱"
+              maxLength={100}
+            />
           </Form.Item>
           <Form.Item
             name="role"
@@ -282,18 +464,24 @@ const AdminList = () => {
         onCancel={() => setResetPwdVisible(false)}
         onOk={() => pwdForm.submit()}
         width={400}
+        confirmLoading={loading}
+        destroyOnClose
       >
         <Form
           form={pwdForm}
           layout="vertical"
           onFinish={handleResetPwdSubmit}
+          preserve={false}
         >
           <Form.Item
             name="newPassword"
             label="新密码"
-            rules={[{ required: true, message: '请输入新密码' }]}
+            rules={[
+              { required: true, message: '请输入新密码' },
+              { min: 6, max: 20, message: '密码长度为6-20个字符' },
+            ]}
           >
-            <Input.Password placeholder="请输入新密码" />
+            <Input.Password placeholder="请输入新密码" maxLength={20} />
           </Form.Item>
           <Form.Item
             name="confirmPassword"
@@ -310,7 +498,7 @@ const AdminList = () => {
               }),
             ]}
           >
-            <Input.Password placeholder="请再次输入新密码" />
+            <Input.Password placeholder="请再次输入新密码" maxLength={20} />
           </Form.Item>
         </Form>
       </Modal>
