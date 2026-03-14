@@ -1,99 +1,352 @@
 import { request } from '@umijs/max';
 
-// 登录
-export async function login(params: { username: string; password: string }) {
-  return request('/api/auth/login', {
-    method: 'POST',
-    data: params,
-  });
+// ==================== 通用类型定义 ====================
+
+export interface ApiResult<T = any> {
+  success: boolean;
+  message?: string;
+  data: T;
 }
 
-// 获取当前用户信息
-export async function getCurrentUser() {
-  return request('/api/auth/currentUser', {
-    method: 'GET',
-  });
+export interface PageParams {
+  current?: number;
+  pageSize?: number;
+  [key: string]: any;
 }
 
-// 获取仪表盘统计数据
-export async function getDashboardStats() {
-  return request('/api/dashboard/stats', {
-    method: 'GET',
-  });
+export interface PageResult<T = any> {
+  list: T[];
+  total: number;
+  page: number;
+  pageSize: number;
 }
 
-// 博物馆管理
-export async function getMuseumList(params: any) {
-  return request('/api/museum/list', {
-    method: 'GET',
-    params,
-  });
+// ==================== 管理员类型定义 ====================
+
+export interface AdminItem {
+  id: string;
+  username: string;
+  nickname: string;
+  phone?: string;
+  email?: string;
+  status: number;
+  role: 'super' | 'editor' | 'operator';
+  permissions: string[];
+  createTime: string;
+  updateTime?: string;
 }
 
-export async function createMuseum(data: any) {
-  return request('/api/museum/create', {
-    method: 'POST',
-    data,
-  });
+export interface CreateAdminParams {
+  username: string;
+  password: string;
+  nickname: string;
+  phone?: string;
+  email?: string;
+  role: 'super' | 'editor' | 'operator';
+  status?: number;
 }
 
-export async function updateMuseum(id: string, data: any) {
-  return request(`/api/museum/update/${id}`, {
-    method: 'PUT',
-    data,
-  });
+export interface UpdateAdminParams {
+  nickname?: string;
+  phone?: string;
+  email?: string;
+  role?: 'super' | 'editor' | 'operator';
+  status?: number;
 }
 
-export async function deleteMuseum(id: string) {
-  return request(`/api/museum/delete/${id}`, {
-    method: 'DELETE',
-  });
+export interface ResetPasswordParams {
+  newPassword: string;
 }
 
-// UGC管理
-export async function getUGCList(params: any) {
-  return request('/api/ugc/list', {
-    method: 'GET',
-    params,
-  });
+// ==================== 用户类型定义 ====================
+
+export interface UserItem {
+  id: string;
+  username: string;
+  nickname: string;
+  avatar?: string;
+  phone?: string;
+  email?: string;
+  status: number;
+  role: 'admin' | 'user';
+  createTime: string;
 }
 
-export async function approveUGC(id: string) {
-  return request(`/api/ugc/approve/${id}`, {
-    method: 'POST',
-  });
+export interface CreateUserParams {
+  username: string;
+  password: string;
+  nickname?: string;
+  phone?: string;
+  email?: string;
+  role?: 'admin' | 'user';
+  status?: number;
 }
 
-export async function rejectUGC(id: string) {
-  return request(`/api/ugc/reject/${id}`, {
-    method: 'POST',
-  });
+export interface UpdateUserParams {
+  nickname?: string;
+  phone?: string;
+  email?: string;
+  role?: 'admin' | 'user';
+  status?: number;
 }
 
-// 用户管理
-export async function getUserList(params: any) {
-  return request('/api/user/list', {
-    method: 'GET',
-    params,
-  });
+// ==================== 博物馆类型定义 ====================
+
+export interface MuseumItem {
+  id: string;
+  name: string;
+  description?: string;
+  address?: string;
+  city?: string;
+  images?: string[];
+  status: number;
+  createTime: string;
 }
 
-export async function createUser(data: any) {
-  return request('/api/user/create', {
-    method: 'POST',
-    data,
-  });
+export interface CreateMuseumParams {
+  name: string;
+  description?: string;
+  address?: string;
+  city?: string;
+  images?: string[];
+  status?: number;
 }
 
-export async function updateUser(id: string, data: any) {
-  return request(`/api/user/update/${id}`, {
-    method: 'PUT',
-    data,
-  });
+// ==================== UGC类型定义 ====================
+
+export interface UGCItem {
+  id: string;
+  title: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createTime: string;
 }
 
-export async function deleteUser(id: string) {
-  return request(`/api/user/delete/${id}`, {
-    method: 'DELETE',
-  });
+// ==================== 统一错误处理 ====================
+
+class ApiError extends Error {
+  constructor(
+    message: string,
+    public code?: number,
+    public data?: any
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+
+const handleApiError = (error: any): never => {
+  if (error.response) {
+    const { status, data } = error.response;
+    const message = data?.message || `请求失败 (${status})`;
+    throw new ApiError(message, status, data);
+  }
+  if (error.request) {
+    throw new ApiError('网络错误，请检查网络连接');
+  }
+  throw new ApiError(error.message || '未知错误');
+};
+
+const requestWrapper = async <T>(promise: Promise<T>): Promise<T> => {
+  try {
+    const result = await promise;
+    return result;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+// ==================== 认证相关 API ====================
+
+export interface LoginParams {
+  username: string;
+  password: string;
+}
+
+export interface LoginResult {
+  token: string;
+  userInfo: API.CurrentUser;
+}
+
+export async function login(params: LoginParams): Promise<ApiResult<LoginResult>> {
+  return requestWrapper(
+    request('/api/auth/login', {
+      method: 'POST',
+      data: params,
+    })
+  );
+}
+
+export async function getCurrentUser(): Promise<ApiResult<API.CurrentUser>> {
+  return requestWrapper(
+    request('/api/auth/currentUser', {
+      method: 'GET',
+    })
+  );
+}
+
+// ==================== 仪表盘 API ====================
+
+export interface DashboardStats {
+  totalUsers: number;
+  totalMuseums: number;
+  totalUGC: number;
+  pendingUGC: number;
+}
+
+export async function getDashboardStats(): Promise<ApiResult<DashboardStats>> {
+  return requestWrapper(
+    request('/api/dashboard/stats', {
+      method: 'GET',
+    })
+  );
+}
+
+// ==================== 管理员管理 API ====================
+
+export async function getAdminList(params: PageParams): Promise<ApiResult<PageResult<AdminItem>>> {
+  return requestWrapper(
+    request('/api/admin/list', {
+      method: 'GET',
+      params,
+    })
+  );
+}
+
+export async function createAdmin(data: CreateAdminParams): Promise<ApiResult<AdminItem>> {
+  return requestWrapper(
+    request('/api/admin/create', {
+      method: 'POST',
+      data,
+    })
+  );
+}
+
+export async function updateAdmin(id: string, data: UpdateAdminParams): Promise<ApiResult<AdminItem>> {
+  return requestWrapper(
+    request(`/api/admin/update/${id}`, {
+      method: 'PUT',
+      data,
+    })
+  );
+}
+
+export async function deleteAdmin(id: string): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/admin/delete/${id}`, {
+      method: 'DELETE',
+    })
+  );
+}
+
+export async function resetAdminPassword(id: string, data: ResetPasswordParams): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/admin/reset-password/${id}`, {
+      method: 'POST',
+      data,
+    })
+  );
+}
+
+// ==================== 用户管理 API ====================
+
+export async function getUserList(params: PageParams): Promise<ApiResult<PageResult<UserItem>>> {
+  return requestWrapper(
+    request('/api/user/list', {
+      method: 'GET',
+      params,
+    })
+  );
+}
+
+export async function createUser(data: CreateUserParams): Promise<ApiResult<UserItem>> {
+  return requestWrapper(
+    request('/api/user/create', {
+      method: 'POST',
+      data,
+    })
+  );
+}
+
+export async function updateUser(id: string, data: UpdateUserParams): Promise<ApiResult<UserItem>> {
+  return requestWrapper(
+    request(`/api/user/update/${id}`, {
+      method: 'PUT',
+      data,
+    })
+  );
+}
+
+export async function deleteUser(id: string): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/user/delete/${id}`, {
+      method: 'DELETE',
+    })
+  );
+}
+
+// ==================== 博物馆管理 API ====================
+
+export async function getMuseumList(params: PageParams): Promise<ApiResult<PageResult<MuseumItem>>> {
+  return requestWrapper(
+    request('/api/museum/list', {
+      method: 'GET',
+      params,
+    })
+  );
+}
+
+export async function createMuseum(data: CreateMuseumParams): Promise<ApiResult<MuseumItem>> {
+  return requestWrapper(
+    request('/api/museum/create', {
+      method: 'POST',
+      data,
+    })
+  );
+}
+
+export async function updateMuseum(id: string, data: Partial<CreateMuseumParams>): Promise<ApiResult<MuseumItem>> {
+  return requestWrapper(
+    request(`/api/museum/update/${id}`, {
+      method: 'PUT',
+      data,
+    })
+  );
+}
+
+export async function deleteMuseum(id: string): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/museum/delete/${id}`, {
+      method: 'DELETE',
+    })
+  );
+}
+
+// ==================== UGC管理 API ====================
+
+export async function getUGCList(params: PageParams): Promise<ApiResult<PageResult<UGCItem>>> {
+  return requestWrapper(
+    request('/api/ugc/list', {
+      method: 'GET',
+      params,
+    })
+  );
+}
+
+export async function approveUGC(id: string): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/ugc/approve/${id}`, {
+      method: 'POST',
+    })
+  );
+}
+
+export async function rejectUGC(id: string): Promise<ApiResult<void>> {
+  return requestWrapper(
+    request(`/api/ugc/reject/${id}`, {
+      method: 'POST',
+    })
+  );
 }
