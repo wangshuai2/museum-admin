@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: museum-admin
+    restart: unless-stopped
+    ports:
+      - "13031:80"
+    networks:
+      - museum-network
+
+networks:
+  museum-network:
+    external: true

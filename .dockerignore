@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+REPORT.md
+.github
+.husky
+Dockerfile
+docker-compose.yml
+nginx.conf
+config/config.local.ts
+src/.umi
+src/.umi-production
+dist
+.DS_Store

@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    needs: [build]
+    # 只在 main 分支 push 时部署
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Deploy to server via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: ${{ secrets.SERVER_PORT || '22' }}
+        script: |
+          echo "🚀 开始部署后台管理..."
+          cd /root/.openclaw/workspace/team/pm-lead/projects/museum-admin
+          
+          echo "📥 拉取最新代码..."
+          git pull origin main
+          
+          echo "🔄 重启服务..."
+          docker compose down
+          docker compose up -d --build
+          
+          echo "✅ 部署完成!"
+          docker compose ps
