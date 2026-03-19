@@ -58,3 +58,45 @@
 2026-03-19 12:57:59 +08:00:         ║ Now you can open browser with the above addresses↑ ║
 2026-03-19 12:57:59 +08:00:         ╚════════════════════════════════════════════════════╝
 2026-03-19 12:57:59 +08:00: info  - [MFSU][eager] worker init, takes 810ms
+2026-03-19 12:58:05 +08:00: event - [Webpack] Compiled in 6172 ms (418 modules)
+2026-03-19 12:58:05 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 12:58:05 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 12:58:05 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 12:58:05 +08:00: event - [Webpack] Compiled in 125 ms (404 modules)
+2026-03-19 13:01:27 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:01:27 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:01:27 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:01:28 +08:00: event - [Webpack] Compiled in 478 ms (404 modules)
+2026-03-19 13:01:37 +08:00: event - config proxy, request changed, restart server...
+2026-03-19 13:01:37 +08:00: info  - Restart dev server with port 12130...
+2026-03-19 13:01:40 +08:00: info  - [你知道吗？] 如果想点击组件跳转至编辑器源码位置，可尝试新出的 clickToComponent 配置项，详见 https://umijs.org/docs/api/config#clicktocomponent
+2026-03-19 13:01:40 +08:00: info  - Umi v4.6.33
+2026-03-19 13:01:41 +08:00: info  - Preparing...
+2026-03-19 13:01:43 +08:00: 
+2026-03-19 13:01:43 +08:00: > museum-admin@1.0.0 dev
+2026-03-19 13:01:43 +08:00: > max dev
+2026-03-19 13:01:43 +08:00: 
+2026-03-19 13:01:44 +08:00: info  - [你知道吗？] 如果想检测未使用的文件和导出，可尝试新出的 deadCode 配置项，详见 https://umijs.org/docs/api/config#deadcode
+2026-03-19 13:01:44 +08:00: info  - Umi v4.6.33
+2026-03-19 13:01:45 +08:00: info  - Preparing...
+2026-03-19 13:01:46 +08:00: info  - MFSU eager strategy enabled
+2026-03-19 13:01:46 +08:00: info  - [MFSU][eager] restored cache
+2026-03-19 13:01:47 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:01:47 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:01:47 +08:00:         ╔════════════════════════════════════════════════════╗
+2026-03-19 13:01:47 +08:00:         ║ App listening at:                                  ║
+2026-03-19 13:01:47 +08:00:         ║  >   Local: http://localhost:12130                 ║
+2026-03-19 13:01:47 +08:00: ready - ║  > Network: http://38.95.74.95:12130               ║
+2026-03-19 13:01:47 +08:00:         ║                                                    ║
+2026-03-19 13:01:47 +08:00:         ║ Now you can open browser with the above addresses↑ ║
+2026-03-19 13:01:47 +08:00:         ╚════════════════════════════════════════════════════╝
+2026-03-19 13:01:48 +08:00: info  - [MFSU][eager] worker init, takes 853ms
+2026-03-19 13:01:53 +08:00: event - [Webpack] Compiled in 6321 ms (418 modules)
+2026-03-19 13:01:53 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:01:53 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:01:53 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:01:54 +08:00: event - [Webpack] Compiled in 255 ms (404 modules)
+2026-03-19 13:01:54 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:01:54 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:01:54 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:01:54 +08:00: event - [Webpack] Compiled in 118 ms (404 modules)

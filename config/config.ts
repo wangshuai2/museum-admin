@@ -7,14 +7,9 @@ export default defineConfig({
   initialState: {},
   request: {
     baseURL: 'https://api.museumapp.cn',
+    dataPath: 'data',
   },
-  proxy: {
-    '/api': {
-      target: 'https://api.museumapp.cn',
-      changeOrigin: true,
-      pathRewrite: { '^/api': '/api' },
-    },
-  },
+  proxy: false,
   layout: {
     title: '文博通后台管理',
     locale: false,

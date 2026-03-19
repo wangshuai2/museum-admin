@@ -4,6 +4,7 @@ import type { RequestConfig } from '@umijs/max';
 // 运行时配置
 export const request: RequestConfig = {
   timeout: 10000,
+  baseURL: 'https://api.museumapp.cn',
   errorConfig: {
     errorHandler() {},
     errorThrower() {},
