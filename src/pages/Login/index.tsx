@@ -11,7 +11,12 @@ const Login = () => {
 
   const handleSubmit = async (values: { username: string; password: string }) => {
     try {
-      const result = await login(values);
+      // 将 username 转换为 phone
+      const loginData = {
+        phone: values.username,
+        password: values.password,
+      };
+      const result = await login(loginData);
       if (result.success) {
         // 保存token
         localStorage.setItem('token', result.data.token);
@@ -67,11 +72,15 @@ const Login = () => {
                 size: 'large',
                 prefix: <UserOutlined className="prefixIcon" />,
               }}
-              placeholder="用户名"
+              placeholder="手机号"
               rules={[
                 {
                   required: true,
-                  message: '请输入用户名',
+                  message: '请输入手机号',
+                },
+                {
+                  pattern: /^1[3-9]\d{9}$/,
+                  message: '手机号格式不正确',
                 },
               ]}
             />
