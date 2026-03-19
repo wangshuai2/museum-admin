@@ -49,7 +49,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -62,7 +62,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 7
+        "register": 6
       },
       "enableBy": "register"
     },
@@ -92,7 +92,7 @@
             0
           ]
         },
-        "register": 3
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -109,7 +109,7 @@
             2
           ]
         },
-        "register": 4
+        "register": 3
       },
       "enableBy": "register"
     },
@@ -123,11 +123,10 @@
       "time": {
         "hooks": {
           "modifyRoutes": [
-            0,
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -141,11 +140,11 @@
       "time": {
         "hooks": {
           "onDevCompileDone": [
-            16,
+            19,
+            6,
+            6,
             9,
-            5,
-            22,
-            11
+            7
           ]
         },
         "register": 1
@@ -162,11 +161,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            44
+            43
           ],
           "onGenerateFiles": [
-            4,
-            13
+            3
           ]
         },
         "register": 26
@@ -183,11 +181,10 @@
       "time": {
         "hooks": {
           "addEntryCode": [
-            1,
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -207,12 +204,13 @@
             0
           ],
           "onPrepareBuildSuccess": [
-            0,
+            1,
             0,
             0,
             0
           ],
           "onCheckCode": [
+            0,
             0,
             0,
             0,
@@ -265,10 +263,10 @@
       "time": {
         "hooks": {
           "onCheck": [
-            1
+            0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -310,7 +308,7 @@
       "enableBy": "register",
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       }
     },
     "virtual: config-styles": {
@@ -1150,7 +1148,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -1164,10 +1162,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            1
+            0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1197,7 +1195,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 130
+        "register": 143
       },
       "enableBy": "register"
     },
@@ -1210,7 +1208,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 45
+        "register": 32
       },
       "enableBy": "config"
     },
@@ -1240,14 +1238,98 @@
             0
           ],
           "addBeforeMiddlewares": [
-            1
+            0
           ],
           "modifyHTMLFavicon": [
-            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1261,12 +1343,10 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            0,
             1
           ],
           "addRuntimePlugin": [
-            0,
-            1
+            0
           ]
         },
         "register": 1
@@ -1282,7 +1362,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -1296,10 +1376,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            1
+            2
           ],
           "addBeforeMiddlewares": [
-            0
+            1
           ]
         },
         "register": 38
@@ -1327,7 +1407,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       }
     },
     "./node_modules/@umijs/preset-umi/dist/features/overrides/overrides": {
@@ -1340,17 +1420,14 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            0,
             0
           ],
           "addEntryImports": [
             0,
-            0,
-            0,
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1377,20 +1454,17 @@
       "time": {
         "hooks": {
           "modifyConfig": [
-            1
+            0
           ],
           "onGenerateFiles": [
-            106,
-            32
+            106
           ],
           "addPolyfillImports": [
-            0,
-            0,
             0,
             0
           ]
         },
-        "register": 2
+        "register": 1
       }
     },
     "./node_modules/@umijs/preset-umi/dist/features/polyfill/publicPathPolyfill": {
@@ -1403,8 +1477,6 @@
       "time": {
         "hooks": {
           "addPolyfillImports": [
-            0,
-            0,
             0,
             0
           ]
@@ -1423,11 +1495,10 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            301,
-            0
+            180
           ]
         },
-        "register": 1
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1467,14 +1538,13 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            0,
             0
           ],
           "addBeforeMiddlewares": [
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1488,13 +1558,11 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            13,
-            9,
-            15,
-            9
+            16,
+            10
           ]
         },
-        "register": 9
+        "register": 8
       },
       "enableBy": "register"
     },
@@ -1546,8 +1614,7 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            629,
-            63
+            1197
           ]
         },
         "register": 2
@@ -1564,7 +1631,7 @@
       "time": {
         "hooks": {
           "addBeforeBabelPresets": [
-            1
+            0
           ]
         },
         "register": 3
@@ -1593,7 +1660,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -1618,7 +1685,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 28
+        "register": 26
       },
       "enableBy": "config"
     },
@@ -1632,8 +1699,7 @@
       "time": {
         "hooks": {
           "onGenerateFiles": [
-            2,
-            2
+            3
           ]
         },
         "register": 1
@@ -1674,7 +1740,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -1703,7 +1769,7 @@
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1716,7 +1782,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       }
     },
     "./node_modules/@umijs/preset-umi/dist/features/mako/mako": {
@@ -1741,7 +1807,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       }
     },
     "./node_modules/@umijs/preset-umi/dist/features/hmrGuardian/hmrGuardian": {
@@ -1767,10 +1833,94 @@
         "hooks": {
           "addHTMLHeadScripts": [
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ]
         },
-        "register": 32
+        "register": 45
       }
     },
     "./node_modules/@umijs/preset-umi/dist/features/forget/forget": {
@@ -1782,7 +1932,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -1796,10 +1946,10 @@
       "time": {
         "hooks": {
           "modifyUniBundler": [
-            951
+            781
           ]
         },
-        "register": 2
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1825,7 +1975,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 51
+        "register": 52
       },
       "enableBy": "register"
     },
@@ -1842,7 +1992,7 @@
             14
           ]
         },
-        "register": 21
+        "register": 20
       }
     },
     "./node_modules/@umijs/preset-umi/dist/commands/help": {
@@ -1854,7 +2004,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1867,7 +2017,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1906,7 +2056,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1971,7 +2121,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1997,7 +2147,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -2010,7 +2160,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -2023,7 +2173,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -2075,7 +2225,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 11
+        "register": 10
       },
       "enableBy": "register"
     },
@@ -2088,7 +2238,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 27
+        "register": 26
       },
       "enableBy": "register"
     },
@@ -2101,7 +2251,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -2128,12 +2278,10 @@
       "time": {
         "hooks": {
           "addRuntimePlugin": [
-            1,
             0
           ],
           "onGenerateFiles": [
-            1,
-            0
+            1
           ],
           "addTmpGenerateWatcherPaths": [
             0
@@ -2177,21 +2325,16 @@
           ],
           "addEntryImportsAhead": [
             0,
-            0,
-            0,
             0
           ],
           "addRuntimePlugin": [
-            0,
             0
           ],
           "addRuntimePluginKey": [
-            0,
             0
           ],
           "onGenerateFiles": [
-            2,
-            1
+            3
           ],
           "addExtraBabelPlugins": [
             0
@@ -2226,23 +2369,19 @@
       "time": {
         "hooks": {
           "addRuntimePlugin": [
-            0,
             0
           ],
           "addRuntimePluginKey": [
-            0,
             0
           ],
           "onGenerateFiles": [
-            1,
-            0
+            1
           ],
           "addExtraModels": [
-            0,
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -2261,26 +2400,22 @@
             0
           ],
           "addLayouts": [
-            0,
             0
           ],
           "modifyAppData": [
-            1
+            0
           ],
           "addRuntimePlugin": [
-            0,
             0
           ],
           "addRuntimePluginKey": [
-            0,
             0
           ],
           "onGenerateFiles": [
-            3,
-            5
+            4
           ]
         },
-        "register": 3
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -2293,7 +2428,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -2320,12 +2455,10 @@
       "time": {
         "hooks": {
           "addRuntimePlugin": [
-            0,
             0
           ],
           "onGenerateFiles": [
-            27,
-            24
+            30
           ],
           "addTmpGenerateWatcherPaths": [
             0
@@ -2344,7 +2477,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -2358,7 +2491,6 @@
       "time": {
         "hooks": {
           "addRuntimePluginKey": [
-            0,
             0
           ]
         },
@@ -2375,7 +2507,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       }
     },
     "./node_modules/@umijs/plugins/dist/qiankun/slave": {
@@ -2387,7 +2519,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       }
     },
     "./node_modules/@umijs/plugins/dist/react-query": {
@@ -2399,7 +2531,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -2413,15 +2545,13 @@
       "time": {
         "hooks": {
           "addRuntimePluginKey": [
-            0,
             0
           ],
           "onGenerateFiles": [
-            4,
-            2
+            4
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -2434,7 +2564,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -2477,7 +2607,7 @@
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -2494,7 +2624,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -2524,7 +2654,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     }
@@ -3678,7 +3808,7 @@
       "file": "@/pages/Login/index.tsx",
       "id": "1",
       "absPath": "/login",
-      "__content": "import { useState } from 'react';\nimport { history, useModel } from '@umijs/max';\nimport { LoginFormPage, ProFormText } from '@ant-design/pro-components';\nimport { message, Tabs } from 'antd';\nimport { LockOutlined, UserOutlined } from '@ant-design/icons';\nimport { login } from '@/services/api';\n\nconst Login = () => {\n  const [loginType, setLoginType] = useState<'account' | 'phone'>('account');\n  const { setInitialState } = useModel('@@initialState');\n\n  const handleSubmit = async (values: { username: string; password: string }) => {\n    try {\n      // 将 username 转换为 phone\n      const loginData = {\n        phone: values.username,\n        password: values.password,\n      };\n      const result = await login(loginData);\n      if (result.success) {\n        // 保存token\n        localStorage.setItem('token', result.data.token);\n        localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo));\n        \n        // 更新全局状态\n        setInitialState({\n          currentUser: result.data.userInfo,\n          settings: {},\n        });\n        \n        message.success('登录成功');\n        history.push('/dashboard');\n      } else {\n        message.error(result.message || '登录失败');\n      }\n    } catch (error) {\n      message.error('登录失败，请检查用户名和密码');\n    }\n  };\n\n  return (\n    <div\n      style={{\n        backgroundColor: '#f0f2f5',\n        height: '100vh',\n      }}\n    >\n      <LoginFormPage\n        backgroundImageUrl=\"https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqzBKCp.png\"\n        logo=\"https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg\"\n        title=\"文博通\"\n        subTitle=\"博物馆数字化管理平台\"\n        onFinish={handleSubmit}\n        style={{\n          maxWidth: '400px',\n          margin: '0 auto',\n          paddingTop: '100px',\n        }}\n      >\n        <Tabs\n          centered\n          activeKey={loginType}\n          onChange={(activeKey) => setLoginType(activeKey as 'account' | 'phone')}\n        >\n          <Tabs.TabPane key=\"account\" tab=\"账号密码登录\" />\n        </Tabs>\n        {loginType === 'account' && (\n          <>\n            <ProFormText\n              name=\"username\"\n              fieldProps={{\n                size: 'large',\n                prefix: <UserOutlined className=\"prefixIcon\" />,\n              }}\n              placeholder=\"用户名\"\n              rules={[\n                {\n                  required: true,\n                  message: '请输入用户名',\n                },\n              ]}\n            />\n            <ProFormText.Password\n              name=\"password\"\n              fieldProps={{\n                size: 'large',\n                prefix: <LockOutlined className=\"prefixIcon\" />,\n              }}\n              placeholder=\"密码\"\n              rules={[\n                {\n                  required: true,\n                  message: '请输入密码',\n                },\n              ]}\n            />\n          </>\n        )}\n        <div\n          style={{\n            marginBottom: 24,\n          }}\n        >\n          <a style={{ float: 'right' }}>忘记密码</a>\n        </div>\n      </LoginFormPage>\n    </div>\n  );\n};\n\nexport default Login;\n",
+      "__content": "import { useState } from 'react';\nimport { history, useModel } from '@umijs/max';\nimport { LoginFormPage, ProFormText } from '@ant-design/pro-components';\nimport { message, Tabs } from 'antd';\nimport { LockOutlined, UserOutlined } from '@ant-design/icons';\nimport { login } from '@/services/api';\n\nconst Login = () => {\n  const [loginType, setLoginType] = useState<'account' | 'phone'>('account');\n  const { setInitialState } = useModel('@@initialState');\n\n  const handleSubmit = async (values: { username: string; password: string }) => {\n    try {\n      // 将 username 转换为 phone\n      const loginData = {\n        phone: values.username,\n        password: values.password,\n      };\n      const result = await login(loginData);\n      if (result.success) {\n        // 保存token\n        localStorage.setItem('token', result.data.token);\n        localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo));\n        \n        // 更新全局状态\n        setInitialState({\n          currentUser: result.data.userInfo,\n          settings: {},\n        });\n        \n        message.success('登录成功');\n        history.push('/dashboard');\n      } else {\n        message.error(result.message || '登录失败');\n      }\n    } catch (error) {\n      message.error('登录失败，请检查用户名和密码');\n    }\n  };\n\n  return (\n    <div\n      style={{\n        backgroundColor: '#f0f2f5',\n        height: '100vh',\n      }}\n    >\n      <LoginFormPage\n        backgroundImageUrl=\"https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqzBKCp.png\"\n        logo=\"https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg\"\n        title=\"文博通\"\n        subTitle=\"博物馆数字化管理平台\"\n        onFinish={handleSubmit}\n        style={{\n          maxWidth: '400px',\n          margin: '0 auto',\n          paddingTop: '100px',\n        }}\n      >\n        <Tabs\n          centered\n          activeKey={loginType}\n          onChange={(activeKey) => setLoginType(activeKey as 'account' | 'phone')}\n        >\n          <Tabs.TabPane key=\"account\" tab=\"账号密码登录\" />\n        </Tabs>\n        {loginType === 'account' && (\n          <>\n            <ProFormText\n              name=\"username\"\n              fieldProps={{\n                size: 'large',\n                prefix: <UserOutlined className=\"prefixIcon\" />,\n              }}\n              placeholder=\"手机号\"\n              rules={[\n                {\n                  required: true,\n                  message: '请输入手机号',\n                },\n                {\n                  pattern: /^1[3-9]\\d{9}$/,\n                  message: '手机号格式不正确',\n                },\n              ]}\n            />\n            <ProFormText.Password\n              name=\"password\"\n              fieldProps={{\n                size: 'large',\n                prefix: <LockOutlined className=\"prefixIcon\" />,\n              }}\n              placeholder=\"密码\"\n              rules={[\n                {\n                  required: true,\n                  message: '请输入密码',\n                },\n              ]}\n            />\n          </>\n        )}\n        <div\n          style={{\n            marginBottom: 24,\n          }}\n        >\n          <a style={{ float: 'right' }}>忘记密码</a>\n        </div>\n      </LoginFormPage>\n    </div>\n  );\n};\n\nexport default Login;\n",
       "__isJSFile": true,
       "__absFile": "/root/.openclaw/workspace/team/pm-lead/projects/museum-admin/src/pages/Login/index.tsx"
     },
@@ -5462,7 +5592,7 @@
             "format": "esm"
           },
           "src/services/api.ts": {
-            "bytes": 7592,
+            "bytes": 7899,
             "imports": [
               {
                 "path": "src/.umi/exports.ts",
@@ -5473,7 +5603,7 @@
             "format": "esm"
           },
           "src/pages/Login/index.tsx": {
-            "bytes": 3377,
+            "bytes": 3510,
             "imports": [
               {
                 "path": "react",
@@ -7586,10 +7716,10 @@
                 "bytesInOutput": 3731
               },
               "src/services/api.ts": {
-                "bytesInOutput": 3538
+                "bytesInOutput": 3700
               },
               "src/pages/Login/index.tsx": {
-                "bytesInOutput": 4289
+                "bytesInOutput": 4442
               },
               "src/.umi/core/EmptyRoute.tsx": {
                 "bytesInOutput": 381
@@ -7640,7 +7770,7 @@
                 "bytesInOutput": 1956
               }
             },
-            "bytes": 162739
+            "bytes": 163054
           }
         }
       }

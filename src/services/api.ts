@@ -149,12 +149,20 @@ const handleApiError = (error: any): never => {
   throw new ApiError(error.message || '未知错误');
 };
 
-const requestWrapper = async <T>(promise: Promise<T>): Promise<T> => {
+const requestWrapper = async <T>(promise: Promise<T>): Promise<ApiResult<T>> => {
   try {
-    const result = await promise;
-    return result;
+    const result: any = await promise;
+    // 如果后端返回的是标准格式 {success, data, message}
+    if (result && typeof result === 'object' && 'success' in result) {
+      return result as ApiResult<T>;
+    }
+    // 如果后端直接返回数据，包装成标准格式
+    return {
+      success: true,
+      data: result as T,
+    };
   } catch (error) {
-    return handleApiError(error);
+    throw handleApiError(error);
   }
 };
 

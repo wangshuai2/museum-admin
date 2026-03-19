@@ -17,7 +17,9 @@ const Login = () => {
         password: values.password,
       };
       const result = await login(loginData);
-      if (result.success) {
+      console.log('登录结果:', result);
+      
+      if (result.success && result.data) {
         // 保存token
         localStorage.setItem('token', result.data.token);
         localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo));
@@ -33,8 +35,9 @@ const Login = () => {
       } else {
         message.error(result.message || '登录失败');
       }
-    } catch (error) {
-      message.error('登录失败，请检查用户名和密码');
+    } catch (error: any) {
+      console.error('登录错误:', error);
+      message.error(error.message || '登录失败，请检查用户名和密码');
     }
   };
 
