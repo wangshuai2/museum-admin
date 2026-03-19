@@ -172,7 +172,7 @@ export interface LoginResult {
 
 export async function login(params: LoginParams): Promise<ApiResult<LoginResult>> {
   return requestWrapper(
-    request('/api/auth/login', {
+    request('/auth/login', {
       method: 'POST',
       data: params,
     })
@@ -181,7 +181,7 @@ export async function login(params: LoginParams): Promise<ApiResult<LoginResult>
 
 export async function getCurrentUser(): Promise<ApiResult<API.CurrentUser>> {
   return requestWrapper(
-    request('/api/auth/currentUser', {
+    request('/auth/currentUser', {
       method: 'GET',
     })
   );
@@ -198,7 +198,7 @@ export interface DashboardStats {
 
 export async function getDashboardStats(): Promise<ApiResult<DashboardStats>> {
   return requestWrapper(
-    request('/api/dashboard/stats', {
+    request('/dashboard/stats', {
       method: 'GET',
     })
   );
@@ -208,7 +208,7 @@ export async function getDashboardStats(): Promise<ApiResult<DashboardStats>> {
 
 export async function getAdminList(params: PageParams): Promise<ApiResult<PageResult<AdminItem>>> {
   return requestWrapper(
-    request('/api/admin/list', {
+    request('/admin/list', {
       method: 'GET',
       params,
     })
@@ -217,7 +217,7 @@ export async function getAdminList(params: PageParams): Promise<ApiResult<PageRe
 
 export async function createAdmin(data: CreateAdminParams): Promise<ApiResult<AdminItem>> {
   return requestWrapper(
-    request('/api/admin/create', {
+    request('/admin/create', {
       method: 'POST',
       data,
     })
@@ -254,7 +254,7 @@ export async function resetAdminPassword(id: string, data: ResetPasswordParams):
 
 export async function getUserList(params: PageParams): Promise<ApiResult<PageResult<UserItem>>> {
   return requestWrapper(
-    request('/api/user/list', {
+    request('/user/list', {
       method: 'GET',
       params,
     })
@@ -263,7 +263,7 @@ export async function getUserList(params: PageParams): Promise<ApiResult<PageRes
 
 export async function createUser(data: CreateUserParams): Promise<ApiResult<UserItem>> {
   return requestWrapper(
-    request('/api/user/create', {
+    request('/user/create', {
       method: 'POST',
       data,
     })
@@ -291,7 +291,7 @@ export async function deleteUser(id: string): Promise<ApiResult<void>> {
 
 export async function getMuseumList(params: PageParams): Promise<ApiResult<PageResult<MuseumItem>>> {
   return requestWrapper(
-    request('/api/museum/list', {
+    request('/museum/list', {
       method: 'GET',
       params,
     })
@@ -300,7 +300,7 @@ export async function getMuseumList(params: PageParams): Promise<ApiResult<PageR
 
 export async function createMuseum(data: CreateMuseumParams): Promise<ApiResult<MuseumItem>> {
   return requestWrapper(
-    request('/api/museum/create', {
+    request('/museum/create', {
       method: 'POST',
       data,
     })
@@ -328,7 +328,7 @@ export async function deleteMuseum(id: string): Promise<ApiResult<void>> {
 
 export async function getUGCList(params: PageParams): Promise<ApiResult<PageResult<UGCItem>>> {
   return requestWrapper(
-    request('/api/ugc/list', {
+    request('/ugc/list', {
       method: 'GET',
       params,
     })

@@ -100,3 +100,7 @@
 2026-03-19 13:01:54 +08:00: event - [MFSU][eager] start build deps
 2026-03-19 13:01:54 +08:00: info  - [MFSU] skip buildDeps
 2026-03-19 13:01:54 +08:00: event - [Webpack] Compiled in 118 ms (404 modules)
+2026-03-19 13:04:19 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:04:19 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:04:19 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:04:20 +08:00: event - [Webpack] Compiled in 796 ms (404 modules)
