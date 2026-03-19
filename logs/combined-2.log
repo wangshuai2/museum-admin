@@ -1,0 +1,26 @@
+2026-03-19 11:41:39 +08:00: 
+2026-03-19 11:41:39 +08:00: > museum-admin@1.0.0 dev
+2026-03-19 11:41:39 +08:00: > max dev
+2026-03-19 11:41:39 +08:00: 
+2026-03-19 11:41:41 +08:00: info  - [你知道吗？] father 4 正式发布了，详见 https://zhuanlan.zhihu.com/p/558192063
+2026-03-19 11:41:41 +08:00: info  - Umi v4.6.33
+2026-03-19 11:41:41 +08:00: info  - Preparing...
+2026-03-19 11:41:43 +08:00: info  - MFSU eager strategy enabled
+2026-03-19 11:41:43 +08:00: [HPM] Proxy created: /api  -> https://api.museumapp.cn
+2026-03-19 11:41:43 +08:00: [HPM] Proxy rewrite rule created: "^/api" ~> "/api"
+2026-03-19 11:41:43 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 11:41:43 +08:00: info  - [MFSU] buildDeps since cacheDependency has changed
+2026-03-19 11:41:43 +08:00:         ╔════════════════════════════════════════════════════╗
+2026-03-19 11:41:43 +08:00:         ║ App listening at:                                  ║
+2026-03-19 11:41:43 +08:00:         ║  >   Local: http://localhost:12130                 ║
+2026-03-19 11:41:43 +08:00: ready - ║  > Network: http://38.95.74.95:12130               ║
+2026-03-19 11:41:43 +08:00:         ║                                                    ║
+2026-03-19 11:41:43 +08:00:         ║ Now you can open browser with the above addresses↑ ║
+2026-03-19 11:41:43 +08:00:         ╚════════════════════════════════════════════════════╝
+2026-03-19 11:41:44 +08:00: info  - [MFSU][eager] worker init, takes 798ms
+2026-03-19 11:41:44 +08:00: info  - [MFSU][eager] build worker start to build
+2026-03-19 11:41:48 +08:00: event - [Webpack] Compiled in 5053 ms (418 modules)
+2026-03-19 11:41:48 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 11:41:49 +08:00: event - [Webpack] Compiled in 262 ms (404 modules)
+2026-03-19 11:41:49 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 11:41:49 +08:00: event - [Webpack] Compiled in 163 ms (404 modules)

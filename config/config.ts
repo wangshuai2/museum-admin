@@ -5,7 +5,16 @@ export default defineConfig({
   access: {},
   model: {},
   initialState: {},
-  request: {},
+  request: {
+    baseURL: 'https://api.museumapp.cn',
+  },
+  proxy: {
+    '/api': {
+      target: 'https://api.museumapp.cn',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '/api' },
+    },
+  },
   layout: {
     title: '文博通后台管理',
     locale: false,
