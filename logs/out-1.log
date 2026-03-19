@@ -104,3 +104,31 @@
 2026-03-19 13:04:19 +08:00: event - [MFSU][eager] start build deps
 2026-03-19 13:04:19 +08:00: info  - [MFSU] skip buildDeps
 2026-03-19 13:04:20 +08:00: event - [Webpack] Compiled in 796 ms (404 modules)
+2026-03-19 13:04:41 +08:00: 
+2026-03-19 13:04:41 +08:00: > museum-admin@1.0.0 dev
+2026-03-19 13:04:41 +08:00: > max dev
+2026-03-19 13:04:41 +08:00: 
+2026-03-19 13:04:43 +08:00: info  - [你知道吗？] 默认使用 esbuild 作为 JavaScript 压缩工具，也可通过 jsMinifier 配置项切换到 terser 或 uglifyJs 等，详见 https://umijs.org/docs/api/config#jsminifier-webpack
+2026-03-19 13:04:43 +08:00: info  - Umi v4.6.33
+2026-03-19 13:04:44 +08:00: info  - Preparing...
+2026-03-19 13:04:45 +08:00: info  - MFSU eager strategy enabled
+2026-03-19 13:04:45 +08:00: info  - [MFSU][eager] restored cache
+2026-03-19 13:04:46 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:04:46 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:04:46 +08:00:         ╔════════════════════════════════════════════════════╗
+2026-03-19 13:04:46 +08:00:         ║ App listening at:                                  ║
+2026-03-19 13:04:46 +08:00:         ║  >   Local: http://localhost:12130                 ║
+2026-03-19 13:04:46 +08:00: ready - ║  > Network: http://38.95.74.95:12130               ║
+2026-03-19 13:04:46 +08:00:         ║                                                    ║
+2026-03-19 13:04:46 +08:00:         ║ Now you can open browser with the above addresses↑ ║
+2026-03-19 13:04:46 +08:00:         ╚════════════════════════════════════════════════════╝
+2026-03-19 13:04:46 +08:00: info  - [MFSU][eager] worker init, takes 804ms
+2026-03-19 13:04:48 +08:00: event - [Webpack] Compiled in 2721 ms (418 modules)
+2026-03-19 13:04:49 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:04:49 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:04:49 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:04:49 +08:00: event - [Webpack] Compiled in 160 ms (404 modules)
+2026-03-19 13:09:35 +08:00: wait  - [Webpack] Compiling...
+2026-03-19 13:09:35 +08:00: event - [MFSU][eager] start build deps
+2026-03-19 13:09:35 +08:00: info  - [MFSU] skip buildDeps
+2026-03-19 13:09:36 +08:00: event - [Webpack] Compiled in 761 ms (404 modules)

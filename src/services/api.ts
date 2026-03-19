@@ -161,7 +161,7 @@ const requestWrapper = async <T>(promise: Promise<T>): Promise<T> => {
 // ==================== 认证相关 API ====================
 
 export interface LoginParams {
-  username: string;
+  phone: string;
   password: string;
 }
 
