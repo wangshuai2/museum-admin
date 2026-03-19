@@ -81,7 +81,13 @@ export default (props: any) => {
   const { initialState, loading, setInitialState } = initialInfo;
   const userConfig = {
   "title": "文博通后台管理",
-  "locale": false
+  "locale": false,
+  "layout": "mix",
+  "fixedHeader": true,
+  "fixSiderbar": true,
+  "contentWidth": "Fluid",
+  "breakpoint": false,
+  "defaultCollapsed": false
 };
 const formatMessage = undefined;
   const runtimeConfig = pluginManager.applyPlugins({

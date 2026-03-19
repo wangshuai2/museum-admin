@@ -18,6 +18,17 @@ export default defineConfig({
   layout: {
     title: '文博通后台管理',
     locale: false,
+    // 使用混合布局，支持响应式
+    layout: 'mix',
+    // 固定头部和侧边栏
+    fixedHeader: true,
+    fixSiderbar: true,
+    // 内容宽度自适应
+    contentWidth: 'Fluid',
+    // 禁用移动端断点
+    breakpoint: false,
+    // 默认展开侧边栏
+    defaultCollapsed: false,
   },
   routes: [
     {

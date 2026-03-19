@@ -24,3 +24,7 @@
 2026-03-19 11:41:49 +08:00: event - [Webpack] Compiled in 262 ms (404 modules)
 2026-03-19 11:41:49 +08:00: wait  - [Webpack] Compiling...
 2026-03-19 11:41:49 +08:00: event - [Webpack] Compiled in 163 ms (404 modules)
+2026-03-19 11:42:02 +08:00: event - [Webpack] Compiled in 18225 ms (5458 modules)
+2026-03-19 11:42:02 +08:00: info  - [MFSU][eager] write cache
+2026-03-19 11:42:02 +08:00: info  - [MFSU] buildDepsAgain
+2026-03-19 11:42:02 +08:00: info  - [MFSU] skip buildDeps

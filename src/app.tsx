@@ -73,6 +73,16 @@ export const layout = () => {
     menu: {
       locale: false,
     },
+    // 禁用移动端布局，使用桌面端布局
+    layout: 'mix',
+    // 固定头部
+    fixedHeader: true,
+    // 固定侧边栏
+    fixSiderbar: true,
+    // 不限制内容宽度
+    contentWidth: 'Fluid',
+    // 响应式断点
+    breakpoint: false,
     logout: () => {
       localStorage.removeItem('token');
       localStorage.removeItem('userInfo');
