@@ -1,8 +1,8 @@
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Popconfirm, Tag, message, Modal, Image, Space } from 'antd';
-import { CheckOutlined, CloseOutlined, EyeOutlined } from '@ant-design/icons';
-import { useRef, useState } from 'react';
-import { getUGCList, approveUGC, rejectUGC } from '@/services/api';
+import { approveUGC, getUGCList, rejectUGC } from "@/services/api";
+import { CheckOutlined, CloseOutlined, EyeOutlined } from "@ant-design/icons";
+import { ProTable } from "@ant-design/pro-components";
+import { Button, Image, message, Modal, Popconfirm, Space, Tag } from "antd";
+import { useRef, useState } from "react";
 
 interface UGCItem {
   id: string;
@@ -24,13 +24,13 @@ const UGCList = () => {
     try {
       const result = await approveUGC(id);
       if (result.success) {
-        message.success('审核通过');
+        message.success("审核通过");
         actionRef.current?.reload();
       } else {
-        message.error(result.message || '操作失败');
+        message.error(result.message || "操作失败");
       }
     } catch (error) {
-      message.error('操作失败');
+      message.error("操作失败");
     }
   };
 
@@ -38,13 +38,13 @@ const UGCList = () => {
     try {
       const result = await rejectUGC(id);
       if (result.success) {
-        message.success('已拒绝');
+        message.success("已拒绝");
         actionRef.current?.reload();
       } else {
-        message.error(result.message || '操作失败');
+        message.error(result.message || "操作失败");
       }
     } catch (error) {
-      message.error('操作失败');
+      message.error("操作失败");
     }
   };
 
@@ -55,75 +55,77 @@ const UGCList = () => {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
+      title: "ID",
+      dataIndex: "id",
       width: 80,
       search: false,
     },
     {
-      title: '内容',
-      dataIndex: 'content',
+      title: "内容",
+      dataIndex: "content",
       ellipsis: true,
       width: 300,
     },
     {
-      title: '图片',
-      dataIndex: 'images',
+      title: "图片",
+      dataIndex: "images",
       width: 100,
       search: false,
-      render: (images: string[]) => (
+      render: (images: string[]) =>
         images && images.length > 0 ? (
           <Image.PreviewGroup>
             <Image
               src={images[0]}
               width={60}
               height={60}
-              style={{ objectFit: 'cover', borderRadius: 4 }}
+              style={{ objectFit: "cover", borderRadius: 4 }}
             />
           </Image.PreviewGroup>
         ) : (
-          <span style={{ color: '#999' }}>无图片</span>
-        )
-      ),
+          <span style={{ color: "#999" }}>无图片</span>
+        ),
     },
     {
-      title: '作者',
-      dataIndex: 'author',
+      title: "作者",
+      dataIndex: "author",
       width: 120,
     },
     {
-      title: '关联博物馆',
-      dataIndex: 'museum',
+      title: "关联博物馆",
+      dataIndex: "museum",
       width: 150,
     },
     {
-      title: '状态',
-      dataIndex: 'status',
+      title: "状态",
+      dataIndex: "status",
       width: 100,
       render: (status: number) => {
         const statusMap: Record<number, { color: string; text: string }> = {
-          0: { color: 'warning', text: '待审核' },
-          1: { color: 'success', text: '已通过' },
-          2: { color: 'error', text: '已拒绝' },
+          0: { color: "warning", text: "待审核" },
+          1: { color: "success", text: "已通过" },
+          2: { color: "error", text: "已拒绝" },
         };
-        const { color, text } = statusMap[status] || { color: 'default', text: '未知' };
+        const { color, text } = statusMap[status] || {
+          color: "default",
+          text: "未知",
+        };
         return <Tag color={color}>{text}</Tag>;
       },
       valueEnum: {
-        0: { text: '待审核' },
-        1: { text: '已通过' },
-        2: { text: '已拒绝' },
+        0: { text: "待审核" },
+        1: { text: "已通过" },
+        2: { text: "已拒绝" },
       },
     },
     {
-      title: '发布时间',
-      dataIndex: 'createTime',
+      title: "发布时间",
+      dataIndex: "createTime",
       width: 180,
       search: false,
     },
     {
-      title: '操作',
-      valueType: 'option',
+      title: "操作",
+      valueType: "option",
       width: 200,
       render: (_: any, record: UGCItem) => [
         <Button
@@ -141,7 +143,7 @@ const UGCList = () => {
               type="link"
               icon={<CheckOutlined />}
               onClick={() => handleApprove(record.id)}
-              style={{ color: '#52c41a' }}
+              style={{ color: "#52c41a" }}
             >
               通过
             </Button>
@@ -195,10 +197,22 @@ const UGCList = () => {
           currentRecord?.status === 0 ? (
             <Space>
               <Button onClick={() => setDetailVisible(false)}>关闭</Button>
-              <Button danger onClick={() => { handleReject(currentRecord.id); setDetailVisible(false); }}>
+              <Button
+                danger
+                onClick={() => {
+                  handleReject(currentRecord.id);
+                  setDetailVisible(false);
+                }}
+              >
                 拒绝
               </Button>
-              <Button type="primary" onClick={() => { handleApprove(currentRecord.id); setDetailVisible(false); }}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  handleApprove(currentRecord.id);
+                  setDetailVisible(false);
+                }}
+              >
                 通过
               </Button>
             </Space>
@@ -211,27 +225,45 @@ const UGCList = () => {
         {currentRecord && (
           <div>
             <div style={{ marginBottom: 16 }}>
-              <strong>作者：</strong>{currentRecord.author}
+              <strong>作者：</strong>
+              {currentRecord.author}
             </div>
             <div style={{ marginBottom: 16 }}>
-              <strong>关联博物馆：</strong>{currentRecord.museum}
+              <strong>关联博物馆：</strong>
+              {currentRecord.museum}
             </div>
             <div style={{ marginBottom: 16 }}>
               <strong>状态：</strong>
-              <Tag color={
-                currentRecord.status === 0 ? 'warning' :
-                currentRecord.status === 1 ? 'success' : 'error'
-              }>
-                {currentRecord.status === 0 ? '待审核' :
-                 currentRecord.status === 1 ? '已通过' : '已拒绝'}
+              <Tag
+                color={
+                  currentRecord.status === 0
+                    ? "warning"
+                    : currentRecord.status === 1
+                    ? "success"
+                    : "error"
+                }
+              >
+                {currentRecord.status === 0
+                  ? "待审核"
+                  : currentRecord.status === 1
+                  ? "已通过"
+                  : "已拒绝"}
               </Tag>
             </div>
             <div style={{ marginBottom: 16 }}>
-              <strong>发布时间：</strong>{currentRecord.createTime}
+              <strong>发布时间：</strong>
+              {currentRecord.createTime}
             </div>
             <div style={{ marginBottom: 16 }}>
               <strong>内容：</strong>
-              <div style={{ marginTop: 8, padding: 12, background: '#f5f5f5', borderRadius: 4 }}>
+              <div
+                style={{
+                  marginTop: 8,
+                  padding: 12,
+                  background: "#f5f5f5",
+                  borderRadius: 4,
+                }}
+              >
                 {currentRecord.content}
               </div>
             </div>
@@ -247,7 +279,7 @@ const UGCList = () => {
                           src={img}
                           width={120}
                           height={120}
-                          style={{ objectFit: 'cover', borderRadius: 4 }}
+                          style={{ objectFit: "cover", borderRadius: 4 }}
                         />
                       ))}
                     </Space>

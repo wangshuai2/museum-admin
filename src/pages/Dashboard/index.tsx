@@ -1,13 +1,13 @@
-import { StatisticCard, ProCard } from '@ant-design/pro-components';
-import { Row, Col, DatePicker, Space } from 'antd';
-import { useEffect, useState } from 'react';
+import { getDashboardStats } from "@/services/api";
 import {
   BankOutlined,
-  UserOutlined,
-  FileTextOutlined,
   EyeOutlined,
-} from '@ant-design/icons';
-import { getDashboardStats } from '@/services/api';
+  FileTextOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { ProCard, StatisticCard } from "@ant-design/pro-components";
+import { Col, DatePicker, Row, Space } from "antd";
+import { useEffect, useState } from "react";
 
 const { Statistic } = StatisticCard;
 
@@ -67,12 +67,14 @@ const Dashboard = () => {
           <Col xs={24} sm={12} md={6}>
             <StatisticCard
               statistic={{
-                title: '博物馆数量',
+                title: "博物馆数量",
                 value: stats.museumCount,
-                icon: <BankOutlined style={{ fontSize: 24, color: '#1890ff' }} />,
+                icon: (
+                  <BankOutlined style={{ fontSize: 24, color: "#1890ff" }} />
+                ),
                 description: (
                   <Statistic.Trend
-                    trend={stats.museumTrend >= 0 ? 'up' : 'down'}
+                    trend={stats.museumTrend >= 0 ? "up" : "down"}
                     value={Math.abs(stats.museumTrend)}
                   />
                 ),
@@ -83,12 +85,14 @@ const Dashboard = () => {
           <Col xs={24} sm={12} md={6}>
             <StatisticCard
               statistic={{
-                title: '注册用户',
+                title: "注册用户",
                 value: stats.userCount,
-                icon: <UserOutlined style={{ fontSize: 24, color: '#52c41a' }} />,
+                icon: (
+                  <UserOutlined style={{ fontSize: 24, color: "#52c41a" }} />
+                ),
                 description: (
                   <Statistic.Trend
-                    trend={stats.userTrend >= 0 ? 'up' : 'down'}
+                    trend={stats.userTrend >= 0 ? "up" : "down"}
                     value={Math.abs(stats.userTrend)}
                   />
                 ),
@@ -99,12 +103,16 @@ const Dashboard = () => {
           <Col xs={24} sm={12} md={6}>
             <StatisticCard
               statistic={{
-                title: 'UGC内容',
+                title: "UGC内容",
                 value: stats.ugcCount,
-                icon: <FileTextOutlined style={{ fontSize: 24, color: '#faad14' }} />,
+                icon: (
+                  <FileTextOutlined
+                    style={{ fontSize: 24, color: "#faad14" }}
+                  />
+                ),
                 description: (
                   <Statistic.Trend
-                    trend={stats.ugcTrend >= 0 ? 'up' : 'down'}
+                    trend={stats.ugcTrend >= 0 ? "up" : "down"}
                     value={Math.abs(stats.ugcTrend)}
                   />
                 ),
@@ -115,12 +123,14 @@ const Dashboard = () => {
           <Col xs={24} sm={12} md={6}>
             <StatisticCard
               statistic={{
-                title: '总访问量',
+                title: "总访问量",
                 value: stats.visitCount,
-                icon: <EyeOutlined style={{ fontSize: 24, color: '#722ed1' }} />,
+                icon: (
+                  <EyeOutlined style={{ fontSize: 24, color: "#722ed1" }} />
+                ),
                 description: (
                   <Statistic.Trend
-                    trend={stats.visitTrend >= 0 ? 'up' : 'down'}
+                    trend={stats.visitTrend >= 0 ? "up" : "down"}
                     value={Math.abs(stats.visitTrend)}
                   />
                 ),
@@ -138,7 +148,15 @@ const Dashboard = () => {
             headerBordered
             style={{ marginBottom: 24 }}
           >
-            <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
+            <div
+              style={{
+                height: 300,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#999",
+              }}
+            >
               图表区域 - 博物馆省市分布
             </div>
           </ProCard>
@@ -149,7 +167,15 @@ const Dashboard = () => {
             headerBordered
             style={{ marginBottom: 24 }}
           >
-            <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
+            <div
+              style={{
+                height: 300,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#999",
+              }}
+            >
               图表区域 - 用户增长趋势
             </div>
           </ProCard>
@@ -158,21 +184,31 @@ const Dashboard = () => {
 
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={12}>
-          <ProCard
-            title="UGC内容统计"
-            headerBordered
-          >
-            <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
+          <ProCard title="UGC内容统计" headerBordered>
+            <div
+              style={{
+                height: 300,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#999",
+              }}
+            >
               图表区域 - UGC内容类型分布
             </div>
           </ProCard>
         </Col>
         <Col xs={24} lg={12}>
-          <ProCard
-            title="热门博物馆排行"
-            headerBordered
-          >
-            <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
+          <ProCard title="热门博物馆排行" headerBordered>
+            <div
+              style={{
+                height: 300,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#999",
+              }}
+            >
               图表区域 - 热门博物馆TOP10
             </div>
           </ProCard>
